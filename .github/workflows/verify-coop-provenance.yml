@@ -1,0 +1,32 @@
+name: Verify coop provenance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-coop-provenance:
+    name: verify-coop-provenance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the proposed cask and verifier
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check Ruby syntax
+        run: ruby -c scripts/verify-coop-provenance.rb
+
+      - name: Test the verifier
+        run: |
+          gem install --user-install --no-document minitest --version 6.0.6
+          ruby test/verify-coop-provenance_test.rb
+
+      - name: Verify the release checksum and provenance
+        run: ruby scripts/verify-coop-provenance.rb Casks/coop.rb
