@@ -13,6 +13,10 @@ tap "rweir/tap"
 brew "<formula>"
 ```
 
+## Formula
+
+- `atuin` - fork of upstream that restores TLSv1.3 support by using `rustls`
+
 ## Documentation
 
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
