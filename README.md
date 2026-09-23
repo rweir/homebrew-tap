@@ -16,6 +16,10 @@ brew "<formula>"
 ## Formula
 
 - `atuin` - fork of upstream that restores TLSv1.3 support by using `rustls`
+- `supersonic` - fork of upstream that works on MacOS 27, note you
+  need to run `xattr -r -d com.apple.quarantine
+  /Applications/Supersonic.app` after installation/update to make it
+  executable
 
 ## Documentation
 
