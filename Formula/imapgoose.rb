@@ -25,9 +25,10 @@ class Imapgoose < Formula
     system "make", "capcheck"
 
     bin.install "imapgoose"
-    bin.install "capcheck"
+    bin.install "capcheck" => "imapgoose-capcheck"
     man1.install "imapgoose.1"
     man5.install "imapgoose.conf.5"
+    zsh_completion.install "contrib/_imapgoose"
   end
 
   test do
