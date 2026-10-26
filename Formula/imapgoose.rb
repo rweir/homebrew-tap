@@ -10,6 +10,7 @@ class Imapgoose < Formula
   end
 
   depends_on "go" => :build
+  depends_on "sqlite"
 
   deny_network_access!
 
@@ -25,11 +26,12 @@ class Imapgoose < Formula
 
     bin.install "imapgoose"
     bin.install "capcheck"
-    man1.install Dir["imapgoose.1"]
-    man5.install Dir["imapgoose.conf.5.5"]
+    man1.install "imapgoose.1"
+    man5.install "imapgoose.conf.5"
   end
 
   test do
-    system "make", "check"
+    assert_match "failed to open config file",
+                 shell_output("#{bin}/imapgoose -c #{testpath}/missing.scfg 2>&1", 1)
   end
 end
